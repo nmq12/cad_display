@@ -8,8 +8,12 @@ let camera, scene, renderer, controls;
 // https://3dviewer.net/#
 
 async function LoadStep(filename, targetObject) {
+    console.log("HIT");
+
     // init occt-import-js
-    const occt = await occtimportjs();
+    const occt = await occt
+
+    importjs();
 
     // import step file
     let response = await fetch(filename);
@@ -41,11 +45,13 @@ async function LoadStep(filename, targetObject) {
         const mesh = new THREE.Mesh(geometry, material);
         targetObject.add(mesh);
     }
+    console.log("HIT2");
+
     console.log(result);
 }
 
 async function setupCamera(width, height) {
-    camera = new THREE.PerspectiveCamera (45, width / height, 1.0, 500000.0);
+    camera = new THREE.PerspectiveCamera (45, width / height, 1.0, 1000000.0);
     camera.position.set (100, 5000.0, 120);
     camera.up.set (0.0, 0.0, 180.0);
     camera.lookAt (new THREE.Vector3 (0.0, 0.0, 0.0));
@@ -87,8 +93,8 @@ async function Load(filename) {
 
     setupControl(mainObject);
 
-    const stats = new Stats()
-    document.body.appendChild(stats.dom)
+    // const stats = new Stats()
+    // document.body.appendChild(stats.dom)
 
     window.addEventListener( 'resize', onWindowResize );
     animate()
